@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sharp Side</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0b2a5b">
+<meta name="apple-mobile-web-app-title" content="Sharp Side">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script>
+  // Opened from the home screen icon: go straight to the app.
+  var APP = "https://sharpsidearbtracker.streamlit.app/";
+  if (location.search.indexOf("launch=1") !== -1 ||
+      window.matchMedia("(display-mode: standalone)").matches || navigator.standalone) {
+    location.replace(APP);
+  }
+</script>
+<style>
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+         background: #f3f5f8; color: #1b2430; display: flex; justify-content: center; }
+  main { max-width: 380px; width: 100%; padding: 48px 16px; text-align: center; box-sizing: border-box; }
+  img { width: 220px; max-width: 70%; }
+  .card { background: #fff; border: 1px solid #dfe4eb; border-radius: 16px; padding: 24px; margin-top: 20px;
+          box-shadow: 0 4px 16px rgba(16, 24, 40, .08); text-align: left; }
+  a.btn, button { display: block; width: 100%; box-sizing: border-box; text-align: center; background: #1563d6;
+          color: #fff; border: 0; border-radius: 12px; padding: 14px; font-size: 16px; font-weight: 600;
+          text-decoration: none; margin-top: 12px; cursor: pointer; }
+  button.alt { background: #fff; color: #1563d6; border: 1px solid #1563d6; }
+  p { color: #6b7685; font-size: 15px; line-height: 1.45; margin: 0; }
+  ol { color: #1b2430; font-size: 15px; line-height: 1.5; padding-left: 20px; margin: 10px 0 0; }
+</style>
+</head>
+<body>
+<main>
+  <img src="logo.svg" alt="Sharp Side">
+  <div class="card">
+    <p>Put Sharp Side on your home screen with its own icon:</p>
+    <button id="install" class="alt" hidden>Install Sharp Side</button>
+    <ol id="steps">
+      <li>Tap Chrome's <b>&#8942;</b> menu (top right).</li>
+      <li>Tap <b>Add to Home screen</b> (or <b>Install app</b>), then <b>Install</b>.</li>
+    </ol>
+    <a class="btn" href="https://sharpsidearbtracker.streamlit.app/">Open Sharp Side</a>
+  </div>
+</main>
+<script>
+  var prompt;
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault(); prompt = e; document.getElementById("install").hidden = false;
+  });
+  document.getElementById("install").addEventListener("click", function () { if (prompt) prompt.prompt(); });
+</script>
+</body>
+</html>
